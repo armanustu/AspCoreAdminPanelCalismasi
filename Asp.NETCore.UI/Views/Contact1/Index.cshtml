@@ -1,0 +1,106 @@
+﻿@model DataEntityLayer.Concrete.Contact
+@{
+	Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+	
+		<h3 class="tittle">İletişim</h3>
+		<p class="sub text-center">Bize Yazın</p>
+		<div class="contact-map inner-sec">
+        <iframe src="https://www.google.com/maps/d/embed?mid=1LKECw6RoOn0S6qyO5yPMOa4YMSE&hl=en_US&ehbc=2E312F" class="map" style="border:0; height:600px; width:300px;"  ></iframe>
+		</div>
+		<div class="ad-inf-sec bg-light">
+			<div class="container">
+				<div class="address row">
+
+					<div class="col-lg-4 address-grid">
+						<div class="row address-info">
+							<div class="col-md-4 address-left text-center">
+								<i class="far fa-map"></i>
+							</div>
+							<div class="col-md-8 address-right text-left">
+								<h6>Rektörlük Addres</h6>
+								<p>
+									Ege Üniversitesi Rektörlüğü Gençlik Caddesi 35040 Bornova-İZMİR
+
+								</p>
+							</div>
+						</div>
+
+					</div>
+					<div class="col-lg-4 address-grid">
+						<div class="row address-info">
+							<div class="col-md-4 address-left text-center">
+								<i class="far fa-envelope"></i>
+							</div>
+							<div class="col-md-8 address-right text-left">
+								<h6>Email</h6>
+								<p>
+									Email: webadmin@ege.edu.tr
+									
+
+								</p>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-lg-4 address-grid">
+						<div class="row address-info">
+							<div class="col-md-4 address-left text-center">
+								<i class="fas fa-mobile-alt"></i>
+							</div>
+							<div class="col-md-8 address-right text-left">
+								<h6>Telefon</h6>
+								<p>(0-232) 311 10 10</p>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="contact_grid_right">
+				<form method="post">
+					<div class="row contact_left_grid">
+						<div class="col-md-6 con-left">
+							<div class="form-group">
+								<label for="validationCustom01 my-2">İsim</label>
+								<input class="form-control" type="text" name="ContactUserName" placeholder="" required="">
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Email</label>
+								<input class="form-control" type="email" name="ContactMail" placeholder="" required="">
+							</div>
+							<div class="form-group">
+								<label for="validationCustom03 my-2">Konu</label>
+								<input class="form-control" type="text" name="ContactSubject" placeholder="" required="">
+							</div>
+						</div>
+						<div class="col-md-6 con-right">
+							<div class="form-group">
+								<label for="textarea">Mesaj</label>
+								<textarea id="textarea" name="ContactMessage" placeholder=""></textarea>
+							</div>
+							<input class="form-control" type="submit" value="Gönder">
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (ViewBag.Status == true)
+{
+	<script>
+		swal({
+			title: "Bilgi",
+			text: "Mesajınız Gönderilmiştir",
+			icon: "success",
+			buttons: "Tamam"
+		})
+
+	</script>
+}

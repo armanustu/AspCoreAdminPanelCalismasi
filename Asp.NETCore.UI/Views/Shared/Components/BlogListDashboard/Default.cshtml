@@ -1,0 +1,61 @@
+﻿@using DataEntityLayer.Concrete
+@model List<Blog>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Bloglar</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Resim</th>
+                                <th>BlogID</th>
+                                <th>Başlık</th>
+                                <th>Durum</th>
+                                <th>Kategori ID</th>
+                                <th>Tarih</th>
+                                <th>Kategori Adı </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                
+                           
+                            <tr>
+                                <td>
+                                    <img src="~/Writer/assets/images/faces/face1.jpg" class="me-2" alt="image"> 
+                                </td>
+                                    <td> @item.BlogID</td>
+                                     <td>
+                                    <label class="badge badge-gradient-success">@item.BlogTitle</label>
+                                </td>
+                                    <td>
+                                        <label class="badge badge-gradient-success">@item.BlogStatus</label>
+                                    </td>
+                                    <td>
+                                        <label class="badge badge-gradient-success">@item.CategoryID</label>
+                                    </td>
+
+                                    <td>@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyy"))</td>
+                                    
+                                  @*   @if(item.Category.CategoryName == null)
+                                        {
+                                        <td>NULL </td>
+                                    }
+                                    else
+                                    {
+                                        <td>@item.Category.CategoryName</td>
+                                    } *@
+                                    <td><a href="/Blog/BlogReadAll/@item.BlogID" class="btn btn-dark">Detay</a></td>      
+                            </tr>                           
+                            }
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

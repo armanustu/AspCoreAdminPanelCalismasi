@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DataEntityLayer.Concrete.Notification>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/WriterPanelLayout.cshtml";
+}
+<link href="c:\users\lenovo\.nuget\packages\bootstrap\5.3.2\contentfiles\any\any\wwwroot\css\bootstrap.min.css" rel="stylesheet" />
+<h1>Bildirimler</h1>
+
+<table class="border solid 1px">
+    <tr>
+    <th>ID</th>
+    <th>Açıklama</th>
+    <th>Tarih</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+@item.NoticationID
+                </td>
+                <td>
+                    @item.NotificationDetails
+                </td>
+                <td>
+                    @item.NotificationDate.ToString()
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

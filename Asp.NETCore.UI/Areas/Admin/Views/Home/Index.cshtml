@@ -1,0 +1,21 @@
+﻿@model IEnumerable<DataEntityLayer.Concrete.Blog>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Bloglar</h1>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-6 col-sm-3 col-md-6">
+            <img src="@Url.Content("~/content/"+item.BlogImage)" class="card-img-top" alt="@item.BlogTitle" style="width:200px;height:200px">
+            <div class="card-body">
+                <h5 class="card-title">@item.BlogTitle</h5>
+                <p class="card-text">@item.BlogContent</p>
+                <p class="card-text"><small class="text-body-secondary">@item.BlogCreateDate.Value</small></p>
+            </div>
+        </div>
+    }
+</div>
+

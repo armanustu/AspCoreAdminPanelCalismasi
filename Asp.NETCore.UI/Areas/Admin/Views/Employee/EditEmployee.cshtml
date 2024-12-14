@@ -1,0 +1,14 @@
+﻿@using static Asp.NETCore.UI.Areas.Admin.Controllers.EmployeeController;
+@model EmployeeClass
+@{
+    ViewData["Title"] = "EditEmployee";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@using (Html.BeginForm("EditEmployee", "Employee", FormMethod.Post))
+{
+    @Html.HiddenFor(model=>model.EmployeeID,new {@class="form-control"})
+    @Html.Label("isim")
+    @Html.TextBoxFor(model=>model.EmployeeName,new {@class="form-control"})
+    <button type="submit">Güncelle</button>
+}
+

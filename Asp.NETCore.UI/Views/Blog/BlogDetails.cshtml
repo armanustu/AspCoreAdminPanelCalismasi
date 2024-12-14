@@ -1,0 +1,85 @@
+﻿@Model Comments
+@{
+    ViewData["Title"] = "BlogDetails";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+@if (ViewData["Message"] != null)
+{
+    <script>
+        alert('@Html.Raw(ViewData["Message"])');
+    </script>
+}
+<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+    <div class="blog-grid-top">
+        <div class="b-grid-top">
+            <div class="blog_info_left_grid">
+                <a href="single.html">
+                    <img src="images/b1.jpg" class="img-fluid" alt="">
+                </a>
+            </div>
+            <div class="blog-info-middle">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-calendar-alt"></i>
+                            @Model.BlogCreateDate
+                        </a>
+                    </li>
+                    <li class="mx-2">
+                        <a href="#">
+                            <i class="far fa-thumbs-up"></i> 201 Likes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="far fa-comment"></i> 15 Comments
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <h3>
+            <a href="single.html">@Model.BlogTitle</a>
+        </h3>
+        <p>
+            @Model.BlogContent
+        </p>
+        <a href="single.html" class="btn btn-primary read-m">Read More</a>
+    </div>
+
+    <h4>Comments</h4>
+
+    @foreach (var item in ViewBag.data)
+    {
+        <div class="comment-top">
+
+            <div class="media">
+                <img src="images/t1.jpg" alt="" class="img-fluid">
+                <div class="media-body">
+                    <h5 class="mt-0">@item.CommentUserName</h5>
+                    <p>
+                        @item.CommentContent
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="comment-top">
+        <h4>Leave a Comment</h4>
+        <div class="comment-bottom">
+            <form asp-action="CommentForm" asp-controller="Blog" method="post">
+                <input type="hidden" name="BlogId" id="BlogId" value="@Model.BlogID" />
+                <input class="form-control" type="text" name="CommentUserName" id="CommentUserName" placeholder="Name" required />
+                <input class="form-control" type="text" name="CommentTitle" id="CommentTitle" placeholder="title" required />
+                @*<input class="form-control" type="text" name="CommentContent" id="CommentContent" placeholder="Subject" required />*@
+                <textarea class="form-control" name="CommentContent" id="CommentContent" placeholder="Message..."></textarea>
+                <button type="submit" class="btn btn-primary submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+

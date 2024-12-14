@@ -1,0 +1,91 @@
+﻿@model DataEntityLayer.Concrete.Blog
+
+@{
+    ViewData["Title"] = "EditBlog1";
+    Layout = "~/Views/Shared/WriterPanelLayout.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h1>Blog Güncelle</h1>
+
+<h4>Blog</h4>
+<hr />
+<div class="row">
+
+    <div class="col-md-4">
+        <form asp-action="EditBlog">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BlogID" />
+            <div class="form-group">
+                <label asp-for="BlogTitle" class="control-label"></label>
+                <input asp-for="BlogTitle" class="form-control" />
+                <span asp-validation-for="BlogTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BlogContent" class="control-label"></label>
+                <input asp-for="BlogContent" class="form-control" />
+                <span asp-validation-for="BlogContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BlogThumnailImage" class="control-label"></label>
+                <input asp-for="BlogThumnailImage" class="form-control" />
+                <span asp-validation-for="BlogThumnailImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BlogImage" class="control-label"></label>
+                <input asp-for="BlogImage" class="form-control" />
+                <span asp-validation-for="BlogImage" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="BlogCreateDate" class="control-label"></label>
+                <input asp-for="BlogCreateDate" class="form-control" />
+                <span asp-validation-for="BlogCreateDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BlogStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.BlogStatus)
+                        @Html.ValidationMessageFor(model => model.BlogStatus, "", new { @class = "text-danger" })
+                    </div>
+                </div>     
+                </div>
+            <div class="form-group">
+            @Html.Label("Yazar Giriniz")
+            @Html.DropDownListFor(x => x.WriterID, (IEnumerable<SelectListItem>)ViewBag.Writer, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.WriterID)
+            <br />
+            </div>
+            <div class="form-group">
+                @Html.Label("Kategori Seçiniz")
+                @Html.DropDownListFor(x => x.CategoryID, (IEnumerable<SelectListItem>)ViewBag.Category, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.CategoryID)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (ViewBag.Status == true)
+{
+    <script>
+        swal({
+            title: "Bilgi",
+            text: "Güncelleme İşlemi başarılı",
+            icon: "success",
+            buttons: "Tamam"
+        })
+        setTimeout(yonlendir, 3000);
+        function yonlendir() {
+            location.assign("/Blog/BlogListWithKategoriName");
+        }
+    </script>
+}

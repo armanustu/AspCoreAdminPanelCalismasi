@@ -1,0 +1,109 @@
+﻿<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<div style="text-align:center;border:1px solid black">
+<button type="button" id="btngetList" class="btn btn-outline">yazar listesi</button>
+<button type="button" id="btngetir" class="btn btn-sucesss" style="padding-right:3px">yazar getir</button>
+<input type="text" id="WriterID" placeholder="Yazar id giriniz" />
+<button type="button" id="btnAra" class="btn btn-sucesss">Yazar Ara</button>
+<input type="text" id="WriterSearch" placeholder="Ara..." />
+
+</div>
+<div class="container">
+  @*  <h1>How to get data from database using jquery ajax in asp net MVC </h1>*@
+    <br />
+    <fieldset>
+        <legend>
+           Yazarlar  
+        </legend>
+        <table class="table table-bordered table-dark">
+            <thead>
+                <tr>
+                    <th style="color:yellow">ID</th>
+                    <th style="color:yellow">Name</th>
+                </tr>
+            </thead>
+            <tbody id="tblbody">
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btngetList').click(function () {
+            $.ajax({
+                url: "/Admin/Writer/WriterGetList/",
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    let data = JSON.parse(result);
+                    console.log(data);
+                    $("#tblbody").empty();
+                    if (data !== null) {
+                        $.each(data, function (key, item) {
+                            var tablerow = '<tr>'
+                                + '<td>' + item.WriterID + '</td>'
+                                + '<td>' + item.WriterName + '</td>'
+                                + '</tr>';
+                            $("#tblbody").append(tablerow);
+                        });
+                    }
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        });
+        $('#btngetir').click(function () {
+            let id = $("#WriterID").val();
+            $.ajax({
+                url: "/Admin/Writer/WriterGet/" + id,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    let data = JSON.parse(result);
+                    if (data !== null) {
+                        $("#tblbody").empty();
+                        var html = '<tr>'
+                            + '<td>' + data.WriterID + '</td>'
+                            + '<td>' + data.WriterName + '</td>'
+                            + '</tr>';
+                        $("#tblbody").append(html);
+                    }
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        });
+        $('#btnAra').click(function () {
+            let search = $("#WriterSearch").val();
+            $.ajax({
+                url: "/Admin/Writer/WriterSearch/" + search,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    let data = JSON.parse(result);
+                    if (data !== null) {
+                        $("#tblbody").empty();
+                        $.each(data, function (key, item) {
+                            var tablerow = '<tr>'
+                                + '<td>' + item.WriterID + '</td>'
+                                + '<td>' + item.WriterName + '</td>'
+                                + '</tr>';
+                            $("#tblbody").append(tablerow);
+                        });
+                    }
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        });
+    });
+    </script>

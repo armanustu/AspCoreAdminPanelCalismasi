@@ -1,0 +1,24 @@
+﻿@model IEnumerable<DataEntityLayer.Concrete.Blog>
+@{
+    ViewData["Title"] = "Index3";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Index3</h1>
+<table>
+    <thead>
+        <tr>
+            <th>WriterID</th>
+            <th>BlogSayısı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.WriterID</td>
+                <td>@item.BlogSayisi</td>
+            </tr>
+        }       
+    </tbody>
+</table>

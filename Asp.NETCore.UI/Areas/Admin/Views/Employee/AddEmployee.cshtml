@@ -1,0 +1,17 @@
+﻿@using static Asp.NETCore.UI.Areas.Admin.Controllers.EmployeeController
+@model EmployeeClass
+@{
+    ViewData["Title"] = "AddEmployee";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>AddEmployee</h1>
+@using (Html.BeginForm("AddEmployee", "Employee", FormMethod.Post))
+{
+	<div class="form-group">
+		<label for="exampleInputEmail1 mb-2">isim giriniz</label>		
+		@Html.TextBoxFor(model=>model.EmployeeName ,new{@class="form-control"})		
+	</div>	
+	<button type="submit" class="btn btn-primary submit mb-4">Ekle</button>
+	
+}

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DataEntityLayer.Concrete.Blog>
+@{
+    ViewData["Title"] = "GetListBlogWithCategoryWithID";
+    Layout = "~/Views/Shared/WriterPanelLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Başlık</th>
+        <th>Kategori Adı</th>
+        <th>Durum</th>
+        <th>YazarID</th>
+        <th>Tarih</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.BlogID</td>
+            <td>@item.BlogTitle</td>
+            @if (item.Category.CategoryName == null)
+            {
+                <td>NULL</td>
+            }
+            else
+            {
+                <td>@item.Category.CategoryName</td>
+            }
+            @*@if (item.BlogContent == null)
+            {
+                <td> NULL1</td>
+            }
+            else
+            {
+                <td>@item.BlogContent</td>
+            }*@
+            <td>@item.BlogStatus</td>
+            @if (item.WriterID == null)
+            {
+                <td>Null</td>
+            }
+            else
+            {
+                <td>@item.WriterID</td>
+            }
+            @if (item.BlogCreateDate == null)
+            {
+                <td>NULL</td>
+            }
+            else
+            {
+
+                <td>
+                    @(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))
+                </td>
+
+            }
+            <td><a href="/Blog/BlogDelete/@item.BlogID" class="btn btn-primary">Pasif Yap</a></td>
+            <td><a href="/Blog/EditBlog/@item.BlogID" class="btn btn-warning">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Blog/AddBlog" class="btn btn-info">Add New Blog</a>
+
+

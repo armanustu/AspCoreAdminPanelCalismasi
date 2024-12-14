@@ -1,0 +1,49 @@
+﻿@model DataEntityLayer.Concrete.Category
+@{
+    ViewData["Title"] = "YeniKategori";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>YeniKategori</h1>
+@using (Html.BeginForm("AddCategory", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.Label("Kategori Adı")
+        @Html.TextBoxFor(model=>model.CategoryName, new {@class="form-control"})
+        @Html.ValidationMessageFor(model=>model.CategoryName)
+    </div>
+   <br/>
+    <div class="form-group">
+        @Html.Label("Kategori Açıklama")
+        @Html.TextAreaFor(model=>model.CategoryDescription,new {@class="form-control"})
+        @Html.ValidationMessageFor(model=>model.CategoryDescription)
+    </div>
+    <br/>
+    <div class="form-group">
+        @Html.Label("Aktifse Seçiniz")
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.CategoryStatus)
+                @Html.ValidationMessageFor(model => model.CategoryStatus)
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Kaydet" />
+</div>
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (ViewBag.Status == true)
+{
+    <script>
+        swal({
+            title: "Bilgi",
+            text: "Kaydet İşlemi başarılı",
+            icon: "success",
+            buttons: "Tamam"
+        })
+
+    </script>
+}
+

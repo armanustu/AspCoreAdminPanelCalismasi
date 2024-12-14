@@ -1,0 +1,62 @@
+﻿@using static Asp.NETCore.UI.Areas.Admin.Controllers.EmployeeController;
+@model List<EmployeeClass>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<table>
+    <tr>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+        <th>Güncelle</th>
+            </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.EmployeeID</td>
+            <td>@item.EmployeeName</td>
+            @*<td><a href="/Admin/EmployeeTest/EmployeDelete/@item.EmployeeID" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Admin/EmployeeTest/EditEmployee/@item.EmployeeID" class="btn btn-success">Güncelle</a></td>*@
+            <td><a href="/Admin/Employee/EmployeeDelete/@item.EmployeeID" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Admin/Employee/EditEmployee/@item.EmployeeID" class="btn btn-success">Güncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Admin/Employee/AddEmployee" class="btn btn-primary">Ekle</a>
+@if (ViewBag.Status == true)
+{
+    <script>
+        swal({
+            title: "Bilgi",
+            text: "Sil İşlemi başarılı",
+            icon: "success",
+            buttons: "Tamam"
+        })
+    </script>
+}
+@if (ViewBag.Güncelle == true)
+{
+    <script>
+        swal({
+            title: "Bilgi",
+            text: "Güncelleme İşlemi başarılı",
+            icon: "success",
+            buttons: "Tamam"
+        })
+    </script>
+}
+@if (ViewBag.Ekle == true)
+{
+    <script>
+        swal({
+            title: "Bilgi",
+            text: "Ekleme İşlemi başarılı",
+            icon: "success",
+            buttons: "Tamam"
+        })
+    </script>
+}
+

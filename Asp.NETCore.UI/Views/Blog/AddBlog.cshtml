@@ -1,0 +1,95 @@
+﻿@model DataEntityLayer.Concrete.Blog
+
+@{
+    ViewData["Title"] = "AddBlog";
+    Layout = "~/Views/Shared/WriterPanelLayout.cshtml";
+}
+@using (Html.BeginForm("AddBlog", "Blog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.Label("Başlık Giriniz")
+        @Html.TextBoxFor(x => x.BlogTitle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BlogTitle)
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Aktifse Seçiniz")
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.BlogStatus)
+                @Html.ValidationMessageFor(model => model.BlogStatus, "", new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    @* <br />
+    <div class="form-group">
+        @Html.Label("Yazar Seçiniz")
+        @Html.DropDownListFor(x => x.WriterID, (IEnumerable<SelectListItem>)ViewBag.Writer, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.WriterID)
+    </div>
+
+    <br />*@
+    <div class="form-group">
+        @Html.Label("Kategori Seçiniz")
+        @Html.DropDownListFor(x => x.CategoryID, (IEnumerable<SelectListItem>)ViewBag.Category, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.CategoryID)
+    </div>
+    <div class="form-group">
+        @Html.Label("İçerik Giriniz")
+        @Html.TextAreaFor(x =>x.BlogTitle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BlogTitle)
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("İçerik Giriniz")
+        @Html.TextAreaFor(x =>x.BlogContent, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BlogContent)
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="BlogCreateDate" class="control-label"></label>
+        <input asp-for="BlogCreateDate" class="form-control" />
+        <span asp-validation-for="BlogCreateDate" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Küçük Resim Seçiniz")
+        <input type="file" name="uploadThumb" id="uploadThumb" />
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("Büyük Resim Seçiniz")
+        <input type="file" name="uploadImage" id="uploadImage" />
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.Label("İçerik Giriniz")
+        @Html.TextAreaFor(x =>x.BlogContent, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BlogContent)
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if (ViewBag.Status == true)
+{
+    <script>
+        swal({
+            title: "Bilgi",
+            text: "Kaydet İşlemi başarılı",
+            icon: "success",
+            buttons: "Tamam"
+        })
+
+    </script>
+}
+
+
+
+
+
+
+
